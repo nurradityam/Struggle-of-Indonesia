@@ -1,0 +1,41 @@
+<h2>AOE3 3D Model Workflow:</h2>
+<ol>
+<li>Modeling+UV Mapping</li>
+</ol>
+<p>(for the app it's up to you, for this tutorial i'm using autodesk maya 2019)</p>
+<p>few things that i think important:</p>
+<ul>
+<li>use in-game character model/any human model then scale to match 120cm human height as modeling references (very helpful when imported to 3dsmax8, so you dont need to scale a lot to match in-game scale)</li>
+</ul>
+<p><img src="https://media.moddb.com/images/members/4/3461/3460573/profile/maya-human-scale-ref.JPG" alt="maya human scale ref" title="Human Scale Reference" width="419" height="302" /></p>
+<ul>
+<li>it's important to use UV space correctly, any UV outside default U1V1 will result in-game black texture. keep in mind, this is an old RTS game, so you can freely adjust UV island proportion based on contribution on rendered pixel. prioritize front-side model face, then the back-side(not noticeable model face) use shared UV space.</li>
+</ul>
+<p><img src="https://media.moddb.com/images/members/4/3461/3460573/profile/maya-uv_space.JPG" alt="maya uv space" title="UV Space" width="530" height="249" /></p>
+<ul>
+<li>AOE3 use backface culling, so if there is a mesh, only the normal side will rendered in-game, back-side will be passthrough. so if wanna to create plane mesh, just copy the mesh then invert it, and stack it closely. &lt;todo: add pic in-game engine render backface culling&gt;</li>
+</ul>
+<ol>
+<li>Export as OBJ file</li>
+</ol>
+<p><img src="https://media.moddb.com/images/members/4/3461/3460573/profile/maya-obj_setting.JPG" alt="maya obj setting" title="Maya OBJ export Setting" width="333" height="439" /></p>
+<ol>
+<li>Open exported OBJ file to 3dsmax 8 (mandatory, because the gr2 exporter plugin only available on this app)</li>
+</ol>
+<p>few things that i think important:</p>
+<ul>
+<li>Check meshname, sometimes they add "obj" prefix, so fix it. Because when exported .GR2 format save meshname as bone name. this is important for attachment coding.</li>
+</ul>
+<p><img src="https://media.moddb.com/images/members/4/3461/3460573/profile/3dsmax8-exported-obj-prep.JPG" alt="3dsmax8 exported obj prep" width="714" height="631" /></p>
+<ul>
+<li>Object pivot, if your imported model show pivot like that, adjust it to center your model. Because when exported, .GR2 format save object pivot as a bone, and using it for in-game placement</li>
+<li>how to adjust object pivot:<iframe src="https://drive.google.com/file/d/1iauRmNvttD1AZWFOfShhKfwnlRqugXrr/preview" width="640" height="480"></iframe></li>
+<li>Flipped normal, sometimes 3dsmax8 show inverted normal, it cant get rid out by re-export from modeling app. idk why. so must be fixed using 3dsmax8 internal tool &lt;todo: add video how to&gt;</li>
+</ul>
+<ol>
+<li>Assign shader to model</li>
+<li>Adjust pivot rotation and scale in vertex mode</li>
+<li>Export to AOE3 as .GR2 format</li>
+<li>Edit .XML file</li>
+<li>Check in-game model (if model not displayed correctly, goto step 4)</li>
+</ol>
