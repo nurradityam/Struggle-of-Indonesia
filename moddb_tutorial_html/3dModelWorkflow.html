@@ -1,42 +1,127 @@
-<h2>AOE3 3D Model Workflow:</h2>
-<ol>
-<li>Modeling+UV Mapping</li>
-</ol>
-<p>(for the app it's up to you, for this tutorial i'm using autodesk maya 2019)</p>
-<p>few things that i think important:</p>
-<ul>
-<li>use in-game character model/any human model then scale to match 120cm human height as modeling references (very helpful when imported to 3dsmax8, so you dont need to scale a lot to match in-game scale)</li>
-</ul>
-<p><img src="https://media.moddb.com/images/members/4/3461/3460573/profile/maya-human-scale-ref.JPG" alt="maya human scale ref" title="Human Scale Reference" width="419" height="302" /></p>
-<ul>
-<li>it's important to use UV space correctly, any UV outside default U1V1 will result in-game black texture. keep in mind, this is an old RTS game, so you can freely adjust UV island proportion based on contribution on rendered pixel. prioritize front-side model face, then the back-side(not noticeable model face) use shared UV space.</li>
-</ul>
+<center>
+<h2>AOE3 3D Model Workflow: (draft)</h2>
+</center>
+<p></p>
+<center><hr />
+<h3>1.</h3>
+<h3>Modeling and UV Mapping</h3>
+<p></p>
+<hr />
+<p></p>
+<p>For the app it's up to you, for this tutorial i'm using Autodesk Maya 2019. Now we gonna create an attachment.</p>
+<p></p>
+<p>Few things that i think important while doing this stage:</p>
+<p></p>
+</center><center><strong>A.</strong> use in-game character model/any human model then scale to match 120cm human height as modeling references (very helpful when imported to 3dsmax8, so you dont need to scale a lot to match in-game scale).</center><center><img src="https://media.moddb.com/images/members/4/3461/3460573/profile/maya-human-scale-ref.JPG" alt="maya human scale ref" title="Human Scale Reference" width="419" height="302" /></center>
+<p></p>
+<center>
+<p><strong>B.</strong> it's important to use UV space correctly, any UV outside default U1V1 will result in-game black texture. keep in mind, this is an old RTS game, so you can freely adjust UV island proportion based on contribution on rendered pixel. prioritize front-side model face, then the back-side(not noticeable model face) use shared UV space.</p>
+<p></p>
 <p><img src="https://media.moddb.com/images/members/4/3461/3460573/profile/maya-uv_space.JPG" alt="maya uv space" title="UV Space" width="530" height="249" /></p>
-<ul>
-<li>AOE3 use backface culling, so if there is a mesh, only the normal side will rendered in-game, back-side will be passthrough. so if wanna to create plane mesh, just copy the mesh then invert it, and stack it closely. &lt;todo: add pic in-game engine render backface culling&gt;</li>
-</ul>
-<ol>
-<li>Export as OBJ file</li>
-</ol>
+</center>
+<p></p>
+<center>
+<p><strong>C. </strong>AOE3 use backface culling, so if there is a mesh, only the normal side will rendered in-game, back-side will be passthrough. so if wanna to create plane mesh, just copy the mesh then invert it, and stack it closely.</p>
+<p></p>
+<hr />
+<h3>2.</h3>
+<h3>Export as OBJ File</h3>
+<p></p>
+<hr />
 <p><img src="https://media.moddb.com/images/members/4/3461/3460573/profile/maya-obj_setting.JPG" alt="maya obj setting" title="Maya OBJ export Setting" width="333" height="439" /></p>
-<ol>
-<li>Open exported OBJ file to 3dsmax 8 (mandatory, because the gr2 exporter plugin only available on this app)</li>
-</ol>
+<p>(Just turn off materials export, so it dont produce unneeded .MTL file)</p>
+<p></p>
+<p>Why use 3dsmax8? because the gr2 exporter plugin only available on this app.</p>
+<p></p>
 <p>few things that i think important:</p>
-<ul>
-<li>Check meshname, sometimes they add "obj" prefix, so fix it. Because when exported .GR2 format save meshname as bone name. this is important for attachment coding.</li>
-</ul>
+<p></p>
+<p><strong>A. </strong>Check meshname, sometimes they add "obj" prefix, so fix it. Because when exported .GR2 format save meshname as bone name. this is important for avoid attachment coding headache.</p>
+<p></p>
 <p><img src="https://media.moddb.com/images/members/4/3461/3460573/profile/3dsmax8-exported-obj-prep.JPG" alt="3dsmax8 exported obj prep" width="714" height="631" /></p>
-<ul>
-<li>Object pivot, if your imported model show pivot like that, adjust it to center your model. Because when exported, .GR2 format save object pivot as a bone, and using it for in-game placement</li>
-<li>how to adjust object pivot:<iframe src="https://drive.google.com/file/d/1iauRmNvttD1AZWFOfShhKfwnlRqugXrr/preview" width="640" height="480"></iframe></li>
-<li>Flipped normal, sometimes 3dsmax8 show inverted normal, it cant get rid out by re-export from modeling app. idk why. so must be fixed using 3dsmax8 internal tool &lt;todo: add video how to&gt;</li>
-</ul>
-<ol>
-<li>Assign shader to model</li>
-<li><img src="https://media.moddb.com/images/members/4/3461/3460573/profile/3dsmax8-create-shader.JPG" alt="3dsmax8 create shader" width="648" height="690" /></li>
-<li>Adjust pivot rotation and scale in vertex mode</li>
-<li>Export to AOE3 as .GR2 format</li>
-<li>Edit .XML file</li>
-<li>Check in-game model (if model not displayed correctly, goto step 4)</li>
-</ol>
+</center>
+<p></p>
+<p><strong>B. </strong>Object pivot, if your imported model show pivot like that, adjust it to center your model. Because when exported, .GR2 format save object pivot as a bone, and using it for in-game placement</p>
+<center>
+<p>how to adjust object pivot:</p>
+</center>
+<p><iframe src="https://drive.google.com/file/d/1iauRmNvttD1AZWFOfShhKfwnlRqugXrr/preview" width="640" height="480"></iframe></p>
+<center>
+<p><strong>C. </strong>Flipped normal, sometimes 3dsmax8 show inverted normal, it cant get rid out by re-export from modeling app. idk why. Must be fixed using 3dsmax8 internal tool</p>
+<p></p>
+<hr />
+<h3>3.</h3>
+<h3>Assign Shader to Mesh</h3>
+<p></p>
+<hr />
+<p>Need "AOE3 Material Selector" plugin.</p>
+<p></p>
+</center>
+<p><img src="https://media.moddb.com/images/members/4/3461/3460573/profile/3dsmax8-create-shader.JPG" alt="3dsmax8 create shader" width="648" height="690" /></p>
+<center>
+<p><img src="https://media.moddb.com/images/members/4/3461/3460573/profile/3dsmax8-create-shader-2.JPG" alt="3dsmax8 create shader 2" width="557" height="430" /></p>
+<p><img src="https://media.moddb.com/images/members/4/3461/3460573/profile/3dsmax8-create-shader-3.JPG" alt="3dsmax8 create shader 3" width="556" height="496" /></p>
+</center>
+<p></p>
+<center>
+<p></p>
+<hr />
+<h3>4.</h3>
+<h3>Edit .XML file</h3>
+<hr />
+<p></p>
+<p></p>
+<p></p>
+<p></p>
+<p></p>
+<hr />
+<h3>5.</h3>
+<h3>Export to AOE3 as .GR2 format</h3>
+<p></p>
+<hr />
+<p>Need "Granny Exporter" plugin.</p>
+<p></p>
+<p>Select mesh then export selected, and use default .GR2 export setting</p>
+<p></p>
+<p></p>
+<p></p>
+<p></p>
+<p></p>
+<hr />
+<h3>6.</h3>
+<h3>Check In-Game Model</h3>
+<p></p>
+<hr />
+<p>Tips:</p>
+<p>to speed up the iteration process, i usually create a scenario map that contain object that i imported. so if i create a change, i just close the game, then go to scenario editor, then load the test scenario map.</p>
+<p>i also set the terrain height until close enough to zoom it.</p>
+<p></p>
+<p></p>
+<p></p>
+<hr />
+<h3>6.</h3>
+<h3>Polishing Model Placement</h3>
+<hr />
+<p>Do some iteration if your object seems odd. do step below and revert to step 5.</p>
+<p></p>
+<p>Rules:</p>
+<p><strong>A. </strong>if you want to manipulate mesh(like the hat too small or too big) do it <strong>ON VERTEX MODE! </strong>because if you do rotate,scale,move on object mode, it doesnt change anything.</p>
+<p></p>
+<p><strong>B. </strong>if you <strong>ONLY</strong> want to manipulate model facing(maybe it facing side or backward) &amp; position(like the hat too far from head) just manipulate the <strong>PIVOT POINT.</strong></p>
+<p></p>
+<p>idk, i think just too avoid another headache.</p>
+<p></p>
+<p></p>
+</center>
+<p></p>
+<hr /><center>
+<h3>7.</h3>
+<h3>Well Done~</h3>
+</center><hr /><center>
+<p>This is the object result, also not final.</p>
+<p></p>
+<p>dont forget read official AOE3 tutorial before it gone for forever.<br /><a href="https://aoe3.heavengames.com/cgi-bin/forums/display.cgi?action=ct&amp;f=14,37400,,10">AOE3 Heaven - The Tutorial Database</a></p>
+<p><a href="https://www.youtube.com/watch?v=ht5JzIqjNNw&amp;list=PLpmd2BvKtF9O652MlhD0ZOX-UlVb9vR2J">Mister SCP Youtube - Modding Age of Empires 3</a></p>
+<p></p>
+<p>next tutorial, texturing i guess</p>
+<p><img src="https://media.moddb.com/images/members/4/3461/3460573/profile/ingame-model.JPG" alt="ingame model" width="494" height="278" /></p>
+</center>
